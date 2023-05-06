@@ -1,0 +1,1 @@
+/* mapping each individual game from data and other imports so that all of them are callable from allgames.js */
