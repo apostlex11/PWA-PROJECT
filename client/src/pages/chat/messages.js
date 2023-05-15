@@ -3,11 +3,10 @@
 import styles from './styles.module.css';
 import { useState, useEffect, useRef } from 'react';
 
-const Messages = ({ socket }) => {
+const Messages = ({ socket, username }) => {
     const [messagesReceived, setMessagesReceived] = useState([]);
     const messagesColumnRef = useRef(null);
 
-    // Runs whenever a socket event is recieved from the server
     useEffect(() => {
         socket.on('receive_message', (data) => {
             console.log(data);
@@ -17,6 +16,7 @@ const Messages = ({ socket }) => {
                     message: data.message,
                     username: data.username,
                     __createdtime__: data.__createdtime__,
+                    id: data.username
                 },
             ]);
         });
@@ -57,16 +57,30 @@ const Messages = ({ socket }) => {
     return (
         <div className={styles.messagesColumn} ref={messagesColumnRef}>
             {messagesReceived.map((msg, i) => (
-                <div className={styles.message} key={i}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span className={styles.msgMeta}>{msg.username}</span>
-                        <span className={styles.msgMeta}>
-                            {formatDateFromTimestamp(msg.__createdtime__)}
-                        </span>
+                <>
+                    {username === msg.username ? 
+                    <div className={styles.message} key={i} style={{ width: '50%', float: 'right' }} id={msg.username}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span className={styles.msgMeta}>{msg.username}</span>
+                            <span className={styles.msgMeta}>
+                                {formatDateFromTimestamp(msg.__createdtime__)}
+                            </span>
+                        </div>
+                        <p className={styles.msgText}>{msg.message}</p>
+                        <br />
                     </div>
-                    <p className={styles.msgText}>{msg.message}</p>
-                    <br />
-                </div>
+                     : 
+                    <div className={styles.message} key={i} style={{ width: '50%', float: 'left' }} id={msg.username}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span className={styles.msgMeta}>{msg.username}</span>
+                            <span className={styles.msgMeta}>
+                                {formatDateFromTimestamp(msg.__createdtime__)}
+                            </span>
+                        </div>
+                        <p className={styles.msgText}>{msg.message}</p>
+                        <br />
+                        </div>}
+                </>
             ))}
         </div>
     );
