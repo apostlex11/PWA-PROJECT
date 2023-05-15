@@ -22,6 +22,7 @@ const RoomAndUsers = ({ socket, username, room }) => {
         socket.emit('leave_room', { username, room, __createdtime__ });
         // Redirect to home page
         navigate('/', { replace: true });
+        window.location.reload();
     };
 
     return (
