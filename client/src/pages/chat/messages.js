@@ -16,7 +16,6 @@ const Messages = ({ socket, username }) => {
                     message: data.message,
                     username: data.username,
                     __createdtime__: data.__createdtime__,
-                    id: data.username
                 },
             ]);
         });
@@ -59,7 +58,7 @@ const Messages = ({ socket, username }) => {
             {messagesReceived.map((msg, i) => (
                 <>
                     {username === msg.username ? 
-                    <div className={styles.message} key={i} style={{ width: '50%', float: 'right' }} id={msg.username}>
+                    <div className={styles.message} key={i} style={{ width: '50%', float: 'right' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span className={styles.msgMeta}>{msg.username}</span>
                             <span className={styles.msgMeta}>
@@ -70,7 +69,7 @@ const Messages = ({ socket, username }) => {
                         <br />
                     </div>
                      : 
-                    <div className={styles.message} key={i} style={{ width: '50%', float: 'left' }} id={msg.username}>
+                    <div className={styles.message} key={i} style={{ width: '50%', float: 'left' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span className={styles.msgMeta}>{msg.username}</span>
                             <span className={styles.msgMeta}>
