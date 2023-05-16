@@ -13,6 +13,8 @@ const harperSaveMessage = require('./services/harper-save-messages');
 const harperGetMessages = require('./services/harper-get-messages');
 const leaveRoom = require('./utils/leave-room');
 
+// we will need to integrate ApolloServer in order to utilize typeDefs, resolvers & authMiddleware context so that log in and sign up information is saved to the database (that same database will be needed in order to save W/L/T ratios and scoreboard/leaderboard info)
+
 app.use(cors()); // Add cors middleware
 
 const server = http.createServer(app);
