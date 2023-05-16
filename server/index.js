@@ -15,6 +15,8 @@ const leaveRoom = require('./utils/leave-room');
 
 // we will need to integrate ApolloServer in order to utilize typeDefs, resolvers & authMiddleware context so that log in and sign up information is saved to the database (that same database will be needed in order to save W/L/T ratios and scoreboard/leaderboard info)
 
+// will possibly need two apps, one for the chat functionality and one for the end-user to actually use that treats the former as if its an API or something
+
 app.use(cors()); // Add cors middleware
 
 const server = http.createServer(app);
