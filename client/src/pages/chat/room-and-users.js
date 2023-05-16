@@ -30,7 +30,7 @@ const RoomAndUsers = ({ socket, username, room }) => {
         <h2 className={styles.roomTitle}>{room}</h2>
 
         <div>
-            {roomUsers.length > 0 && <h5 className={styles.usersTitle}>Users:</h5>}
+            {roomUsers.length > 0} <h5 className={styles.usersTitle}>Connected Users:</h5>
             <ul className={styles.usersList}>
             {roomUsers.map((user) => (
                 <li
