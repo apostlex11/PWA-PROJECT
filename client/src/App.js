@@ -1,5 +1,4 @@
 // client/src/App.js
-
 import './App.css';
 import { useState } from 'react'; // Add this
 import Home from './pages/home';

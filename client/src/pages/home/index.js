@@ -27,10 +27,10 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
                     onChange={(e) => setRoom(e.target.value)} 
                 >
                     <option>-- Select Room --</option>
-                    <option value='javascript'>JavaScript</option>
-                    <option value='node'>Node</option>
-                    <option value='express'>Express</option>
-                    <option value='react'>React</option>
+                    <option value='javascript'>Chess</option>
+                    <option value='node'>Hang Man</option>
+                    <option value='express'>Tic-Tac-Toe</option>
+                    <option value='react'>Checkers</option>
                 </select>
 
                 <button className='btn btn-secondary' 
