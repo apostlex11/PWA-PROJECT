@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
+const app = express();
 
 // ApolloServer stuff
 const { ApolloServer } = require('apollo-server-express');
@@ -30,7 +31,6 @@ const leaveRoom = require('./utils/leave-room');
 app.use(cors());
 
 // general stuff
-const app = express();
 // const httpServer = require('http').createServer(app);
 const cookieParser = require('cookie-parser');
 const CHAT_BOT = 'ChatBot';
