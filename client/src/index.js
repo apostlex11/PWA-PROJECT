@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// adding internet explorer support, using ie11
+// this will only be required if we wind up utilizing the http-proxy-middleware solution in setupProxy.js
+import 'react-app-polyfill/ie11';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
