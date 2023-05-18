@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
     });
 });
 
-io.listen(4000, () => 'Server is running on port 4000');
+ioApp.listen(4000, () => 'Server is running on port 4000');
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
@@ -116,6 +116,15 @@ const startApolloServer = async () => {
         cors: {
             credentials: true,
             origin: process.env.DOMAIN_FULL + ':' + process.env.PORT || '3000'
+        },
+    });
+
+    server.applyMiddleware({
+        ioApp,
+        path: '/socket.io',
+        cors: {
+            credentials: true,
+            origin: process.env.DOMAIN_FULL + ":" + process.env.PORT || '4000'
         },
     });
 

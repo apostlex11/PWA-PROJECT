@@ -9,7 +9,8 @@
         "install": "cd server && npm i && cd ../client && npm i",
         "build": "cd client && npm run build",
         "launch": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
-        "testserver": "concurrently \"cd server && npm run devtest\" \"cd client && npm start\""
+        "testserver": "concurrently \"cd server && npm run devtest\" \"cd client && npm start\"",
+        "testgpt": "concurrently \"cd server && npm run devtest2\" \"cd client && npm start\""
     },
     "keywords": [],
     "author": "",
