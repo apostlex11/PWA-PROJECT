@@ -91,6 +91,22 @@ io.on('connection', (socket) => {
             });
         }
     });
+
+    socket.on("joinRoom", (roomCode) => {
+      console.log(`A user joined the room ${roomCode}`);
+      socket.join(roomCode);
+    });
+  
+    socket.on("play", ({ id, roomCode }) => {
+      console.log(`Moves ${id} in room ${roomCode}`);
+      socket.broadcast.to(roomCode).emit("updateGame", id);
+    });
+  
+    socket.on("disconnect", () => {
+      console.log("User Disconnected");
+    });
+
+    
 });
 
 server.listen(4000, () => 'Server is running on port 4000');

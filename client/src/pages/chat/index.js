@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import MessagesReceived from './messages';
 import SendMessage from './send-message';
 import RoomAndUsersColumn from './room-and-users';
-import Chess from "chess.js";
+// import Chess from "chess.js";
 import { Chessboard } from "react-chessboard";
 
 const Chat = ({ socket, username, room }) => {
