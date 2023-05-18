@@ -21,6 +21,7 @@ const io = new Server(ioApp, {
         methods: ['GET', 'POST'],
     },
 });
+// io.listen(4000, () => 'Server is running on port 4000');
 
 // HarperDB stuff
 const harperSaveMessage = require('./services/harper-save-messages');
@@ -84,6 +85,8 @@ io.on('connection', (socket) => {
     });
 });
 
+io.listen(4000, () => 'Server is running on port 4000');
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
     app.get('/', (req, res) => {
@@ -109,11 +112,11 @@ const startApolloServer = async () => {
     server.applyMiddleware({
         app,
         path: '/graphql',
-        // not sure if we need cors middleware here if it's already being called in an app.use above
-        // cors: {
-        //     credentials: true,
-        //     origin: process.env.DOMAIN_FULL + ':' + process.env.PORT || '3000'
-        // }
+        // cors middleware most likely needed
+        cors: {
+            credentials: true,
+            origin: process.env.DOMAIN_FULL + ':' + process.env.PORT || '3000'
+        },
     });
 
     db.once('open', () => {
@@ -121,7 +124,6 @@ const startApolloServer = async () => {
             console.log(`API server running on port ${PORT}!`);
             console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
         });
-        ioApp.listen(4000, () => 'Server is running on port 4000');
     });
 };
 
