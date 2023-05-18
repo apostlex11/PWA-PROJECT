@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { createServer } = require('http');
 const { ApolloServer } = require('apollo-server-express');
@@ -9,7 +10,7 @@ const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-serve
 const harperSaveMessage = require('./services/harper-save-messages');
 const harperGetMessages = require('./services/harper-get-messages');
 const leaveRoom = require('./utils/leave-room');
-const socketIO = require('socket.io');
+const { Server: SocketIOServer } = require('socket.io');
 
 const pubsub = new PubSub();
 
@@ -65,7 +66,7 @@ apolloServer.start().then(() => {
         console.log('Server listening on port 4000!')
     });
 
-    const io = socketIO(httpServer);
+    const io = new SocketIOServer(httpServer);
     const CHAT_BOT = 'ChatBot';
 
     // chat stuff
