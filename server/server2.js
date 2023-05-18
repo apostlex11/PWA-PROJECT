@@ -4,7 +4,7 @@ const { createServer } = require('http');
 const { ApolloServer } = require('apollo-server-express');
 const { execute, subscribe } = require('graphql');
 const { makeExecutableSchema } = require('@graphql-tools/schema')
-const { createServer: createGraphQLServer } = require('graphql-ws/lib')
+const { createServer: createGraphQLServer, installSubscriptionHandlers } = require('graphql-ws/server')
 const { PubSub } = require('graphql-subscriptions');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const harperSaveMessage = require('./services/harper-save-messages');
@@ -60,7 +60,7 @@ apolloServer.start().then(() => {
         }
     );
 
-    subscriptionServer.installSubscriptionHandlers(httpServer);
+    installSubscriptionHandlers(httpServer, subscriptionServer);
 
     httpServer.listen(4000, () => {
         console.log('Server listening on port 4000!')

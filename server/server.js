@@ -17,7 +17,7 @@ const { Server } = require('socket.io');
 const ioApp = http.createServer(app);
 const io = new Server(ioApp, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:3000' ,
         methods: ['GET', 'POST'],
     },
 });
@@ -115,7 +115,7 @@ const startApolloServer = async () => {
         // cors middleware most likely needed
         cors: {
             credentials: true,
-            origin: process.env.DOMAIN_FULL + ':' + process.env.PORT || '3000'
+            origin: process.env.DOMAIN_FULL + ':' + process.env.PORT || '5000'
         },
     });
 
