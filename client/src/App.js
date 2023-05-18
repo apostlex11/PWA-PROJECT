@@ -1,41 +1,36 @@
-// client/src/App.js
-import './App.css';
-import { useState } from 'react'; // Add this
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import FormContainer from "./components/form/FormContainer";
+import NavigationBar from "./components/lobby/Navigation";
+import TTT from './components/tictactoe/TicTacToe'; 
+import Chat from './pages/chat'
 import Home from './pages/home';
-import Chat from './pages/chat';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import io from 'socket.io-client'; // Add this
+import React, { useState } from 'react';
+import io from 'socket.io-client';
 
-const socket = io.connect('http://localhost:4000'); // Add this -- our server will run on port 4000, so we connect to it from here
+const socket = io.connect('http://localhost:4000');
 
-function App() {
-  const [username, setUsername] = useState(''); // Add this
-  const [room, setRoom] = useState(''); // Add this
+export default function App() {
+  const [username, setUsername] = useState('');
+  const [room, setRoom] = useState('');
 
   return (
     <Router>
-      <div className='App'>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Home
-                username={username} // Add this
-                setUsername={setUsername} // Add this
-                room={room} // Add this
-                setRoom={setRoom} // Add this
-                socket={socket} // Add this
-              />
-            }
-          />
-          <Route
-            path='/chat'
-            element={<Chat username={username} room={room} socket={socket} />}
-          />
-        </Routes>
-      </div>
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<FormContainer />} />
+        <Route path='/chat' element={<Home 
+        setUsername={setUsername}
+        room={room}
+        setRoom={setRoom}
+        socket={socket}
+        />} />
+        <Route path='/chatroom' element={<Chat
+         username={username}
+         room={room}
+         socket={socket}
+        />} />
+        <Route path="/tictactoe" element={<TTT />} />
+      </Routes>
     </Router>
   );
 }
-
-export default App;
